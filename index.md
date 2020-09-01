@@ -1,36 +1,34 @@
 ## Welcome to MIMIC TBI Machine Learning Test Codes!
 
-You can use the [editor on GitHub](https://github.com/georgeshi-hub/MIMIC-TBI/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### Traumatic Brain Injury (TBI) Introduction
+Worldwide, in 2016, there were approximately 27 million new cases of TBI with an age-adjusted incidence rate of 369 per 100,000—representing a 3.6% increase from 1990. In the same year, prevalence was 55.5 million individuals, representing an 8.4% increase from 1990 (Global Burden of Disease [GBD], 2019)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Among TBI cases, mild TBI (mTBI) is often neglected due to lack of symtoms. On the other hand, some healthcare providers such as in ICU, mTBI may be over-treated.
 
-### Markdown
+### Objective of this test code
+The code tries to accomplish three tasks:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+1. Connect MIMIC database (local postgres SQL instance). 
+2. Run SQL from jupyter notebook to query a mTBI table from relevant clinic data. This requires clinical information about criteria. Please refer to attached TBI paper for GCS criteria and ICD query selection.
+3. Predict ICU survival (motality) rate using data such as CT and GCS score. various machine learning models are used and compared.
 
-```markdown
-Syntax highlighted code block
+### Modelling details
+The code extracts the following features from MIMIC database:
+  
+    - Gender	
+    - Age	
+    - ICD diagnosis code	
+    - Glascow Coma Score (gcs)	
+    - Delay time between admission and diagnosis (chartdelayhrs)
 
-# Header 1
-## Header 2
-### Header 3
+### MIMIC Database
+MIMIC is an openly available dataset developed by the MIT Lab for Computational Physiology, comprising deidentified health data associated with ~60,000 intensive care unit admissions. It includes demographics, vital signs, laboratory tests, medications, and more. See more about MIMIC here: https://mimic.physionet.org/about/mimic/
 
-- Bulleted
-- List
+### Limitations
+Because MIMIC database only includes ICU EMR data, the code has limitations:
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/georgeshi-hub/MIMIC-TBI/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+1. prediction is more needed in ER stage, ideally leveraging point of care biomakers to have instant results. Patient got admit by ICU after triage of ER. So the uncertainty is less than ER patient.
+2. no connection with real world ER data yet. After connected and trained using RWD, ML models may play a role of predicting or triaging patient for mTBI.
 
 ### Support or Contact
 
