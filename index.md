@@ -3,23 +3,18 @@
 ### Traumatic Brain Injury (TBI) Introduction
 Worldwide, in 2016, there were approximately 27 million new cases of TBI with an age-adjusted incidence rate of 369 per 100,000—representing a 3.6% increase from 1990. In the same year, prevalence was 55.5 million individuals, representing an 8.4% increase from 1990 (Global Burden of Disease [GBD], 2019)
 
-Among TBI cases, mild TBI (mTBI) is often neglected due to lack of symtoms. On the other hand, some healthcare providers such as in ICU, mTBI may be over-treated.
-
 ### Objective of this test code
 The code tries to accomplish three tasks:
 
-1. Connect MIMIC database (local postgres SQL instance). 
-2. Run SQL from jupyter notebook to query a mTBI table from relevant clinic data. This requires clinical information about criteria. Please refer to attached TBI paper for GCS criteria and ICD query selection.
-3. Predict ICU survival (motality) rate using data such as CT and GCS score. various machine learning models are used and compared.
+1. Connect MIMIC database (local postgres SQL instance) and Run SQL from jupyter notebook to query a mTBI table from relevant clinic data. This requires clinical information about criteria. Please refer to attached TBI paper for Glascow Coma Score (GCS) criteria and ICD query selection.
+2. Visualize the data and remove outliers or better machine learning performance
+3. Predict ICU survival (motality) rate using age, gender, GCS score and Delay time between admission and chart event (chartdelayhrs). Random forest was used.
+    
+### Findings
+Overall AUC of 0.89 was achieved. Most important factors are delay and age. 
 
-### Modelling details
-The code extracts the following features from MIMIC database:
-  
-    - Gender	
-    - Age	
-    - ICD diagnosis code	
-    - Glascow Coma Score (gcs)	
-    - Delay time between admission and diagnosis (chartdelayhrs)
+=== Model Score ===
+89.97
 
 ### MIMIC Database
 MIMIC is an openly available dataset developed by the MIT Lab for Computational Physiology, comprising deidentified health data associated with ~60,000 intensive care unit admissions. It includes demographics, vital signs, laboratory tests, medications, and more. See more about MIMIC here: https://mimic.physionet.org/about/mimic/
